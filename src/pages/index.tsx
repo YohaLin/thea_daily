@@ -50,7 +50,6 @@ export default function LandingPage() {
         {/* 無臉畫製作 */}
         <ProductMaking 
           isWeb={isWeb} 
-          className={styles["product-making"]} 
         />
 
         {/* 選擇個人、雙人、團體 */}
@@ -60,7 +59,6 @@ export default function LandingPage() {
             carouselId={carouselId}
             addCarouselId={addCarouselId}
             reduceCarouselId={reduceCarouselId}
-            className={styles["product-people"]}
           />
         ) : (
           <ProductPeopleMobile
@@ -68,33 +66,28 @@ export default function LandingPage() {
             carouselId={carouselId}
             addCarouselId={addCarouselId}
             reduceCarouselId={reduceCarouselId}
-            className={styles["product-people"]}
           />
         )}
 
         {/* 商品種類 */}
         <ProductCategories
           isWeb={isWeb}
-          className={styles["product-categories"]}
         />
 
         {/* 商品說明 */}
         <ProductDescription 
           isWeb={isWeb} 
-          className={styles["product-description"]} 
         />
 
         {/* 關於作者 */}
         <AboutAuthor 
           isWeb={isWeb} 
-          className={styles["about-author"]} 
         />
       </section>
 
       <footer>
         <Footer 
           isWeb={isWeb} 
-          className={styles["footer"]} 
         />
       </footer>
     </div>
