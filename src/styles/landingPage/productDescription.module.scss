@@ -1,0 +1,47 @@
+@import "@/styles/variables.module.scss";
+
+.product-description {
+  &-container {
+    margin-top: 6.625rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__card {
+    &-container {
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3.75rem;
+    }
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .product-description {
+    &-container {
+      margin-top: 16.125rem;
+    }
+
+    &__card {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: $typo-desktop-interface;
+      font-weight: $weight-semibold;
+      line-height: 2.125rem;
+      letter-spacing: 0.125rem;
+      gap: 0.25rem;
+
+      &-container {
+        margin-top: 6rem;
+        display: flex;
+        flex-direction: row;
+        gap: 8.5rem;
+      }
+    }
+  }
+}
