@@ -1,0 +1,49 @@
+@import "@/styles/variables.module.scss";
+
+.footer {
+  &-container {
+    margin-top: 14.0625rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.8125rem;
+    margin-bottom: 1.5rem;
+  }
+
+  &-content {
+    &-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 0.25rem;
+      font-size: $typo-mobile-auxiliary;
+      letter-spacing: 0.125rem;
+    }
+
+    &-up {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .footer {
+    &-container {
+      margin-top: 21.5625rem;
+      flex-direction: row;
+      gap: 5.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    &-content {
+      &-container {
+        gap: 0.5rem;
+        font-size: $typo-desktop-auxiliary;
+      }
+    }
+  }
+}
