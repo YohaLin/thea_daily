@@ -6,16 +6,14 @@
 * {
   font-family: "Noto Serif TC", serif, sans-serif;
   color: $color-text-dark;
+  box-sizing: border-box;
 }
 
 /* reset css */
 body {
   margin: 0;
   padding: 0;
-}
-
-* {
-  box-sizing: border-box;
+  background-color: $color-bg-one;
 }
 
 p {
