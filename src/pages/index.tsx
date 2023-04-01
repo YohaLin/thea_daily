@@ -19,7 +19,7 @@ import { useState } from "react";
 
 export default function LandingPage() {
   // RWD 處理點：如果寬度 >1400px，isWeb 就回傳 true
-  let isWeb: boolean = useMediaQuery("(min-width: 1440px)");
+  let isWeb: boolean = useMediaQuery("(min-width: 1400px)");
   const [carouselId, setCarouselId] = useState<number>(0);
 
   function addCarouselId():void {
