@@ -23,7 +23,7 @@ export default function Modal({ isWeb, showModal, toggleShowModal }: modalProps)
     <>
       <div className={styles["modal-container"]}>
         <div className={styles["modal__link-container"]}>
-          <Link href="/category" className={styles["modal__link-order"]}>商品訂製</Link>
+          <Link href="/" className={styles["modal__link-order"]}>商品訂製</Link>
           <Link href="/author" className={styles["modal__link-author"]}>創作者</Link>
           <button className={styles["modal__link-signin"]}>登入</button>
           <button className={styles["modal__link-cancel"]} onClick={handleToggleShowModal}>

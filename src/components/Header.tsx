@@ -42,7 +42,7 @@ export default function Header({
           {/* 手機版只有漢堡排，網頁版有完整資訊 */}
           {isWeb ? (
             <>
-              <Link href="/category" className={styles["header__link-order"]}>商品訂製</Link>
+              <Link href="/" className={styles["header__link-order"]}>商品訂製</Link>
               <Link href="/author" className={styles["header__link-author"]}>創作者</Link>
               <button className={styles["header__link-signin"]}>登入</button>
             </>
