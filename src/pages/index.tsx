@@ -11,15 +11,12 @@ import product_people_group from "@/svgs/product_people_group.svg";
 import product_people_individual from "@/svgs/product_people_individual.svg";
 import product_people_double from "@/svgs/product_people_double.svg";
 
-// 透過 custom hook 做到不用 CSS 處理 RWD 的問題
-import useMediaQuery from "@/helpers/custom_hooks/useMediaQuery";
-
 import styles from "@/styles/landingPage.module.scss";
 import { useState } from "react";
+import { IisWebProps } from "@/type-config"
 
-export default function LandingPage() {
-  // RWD 處理點：如果寬度 >1400px，isWeb 就回傳 true
-  let isWeb: boolean = useMediaQuery("(min-width: 1400px)");
+
+export default function LandingPage({isWeb}: IisWebProps) {
   const [carouselId, setCarouselId] = useState<number>(0);
 
   function addCarouselId():void {
@@ -42,9 +39,6 @@ export default function LandingPage() {
 
   return (
     <div className={styles["landing-page-container"]}>
-      <header>
-        <Header isWeb={isWeb} />
-      </header>
 
       <section className={styles["body-container"]}>
         {/* 無臉畫製作 */}
@@ -84,12 +78,6 @@ export default function LandingPage() {
           isWeb={isWeb} 
         />
       </section>
-
-      <footer>
-        <Footer 
-          isWeb={isWeb} 
-        />
-      </footer>
     </div>
   );
 }
