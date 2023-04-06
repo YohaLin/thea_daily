@@ -9,6 +9,7 @@ import product_categories_digital_painting from "@/svgs/product_categories_digit
 import product_categories_frameless_painting from "@/svgs/product_categories_frameless_painting.svg";
 import product_categories_teabag from "@/svgs/product_categories_teabag.svg";
 import { IisWebProps } from "@/type-config";
+import Link from "next/link";
 
 export default function ProductCategories({ isWeb }: IisWebProps) {
   return (
@@ -29,7 +30,7 @@ export default function ProductCategories({ isWeb }: IisWebProps) {
             <ProductOverview isWeb={isWeb} gallery={gallery} key={gallery.id} />
           ))}
         </div>
-        <button className={styles["product-categories-btn"]}>
+        <Link href="/category" className={styles["product-categories-btn"]}>
           <Image
             src={btn}
             alt="logo"
@@ -38,7 +39,7 @@ export default function ProductCategories({ isWeb }: IisWebProps) {
             priority={true}
           />
           <span>前往商品總覽</span>
-        </button>
+        </Link>
       </div>
     </>
   );
