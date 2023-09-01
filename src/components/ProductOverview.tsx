@@ -2,7 +2,7 @@ import Image from "next/image";
 import product_categories_toggle_down from "@/svgs/product_categories_toggle_down.svg";
 import { styled } from "styled-components";
 import { useState } from "react";
-import { IisWebProps, IisShowProps } from "@/type-config";
+import { IisWebProps } from "@/type-config";
 
 // 因為在 type-config.ts 定義過 isWeb，所以不使用 type，而用 interface 來 extends
 interface productOverviewProps extends IisWebProps {
@@ -14,7 +14,7 @@ interface productOverviewProps extends IisWebProps {
   };
 }
 
-const Container = styled.div<{ isShow: IisShowProps }>`
+const Container = styled.div<{ isShow: boolean }>`
   width: 17.5rem;
   height: ${(props) => (props.isShow ? "480px" : "340px")};
   border: 1.3px solid ${(props) => props.theme.colors.text.dark};
@@ -62,7 +62,7 @@ const BottomContainer = styled.div`
   }
 `;
 
-const BottomContent = styled.div<{ isShow: IisShowProps }>`
+const BottomContent = styled.div<{ isShow: boolean }>`
   margin-top: 1.25rem;
   line-height: 1.5rem;
   letter-spacing: 0.125rem;
@@ -78,7 +78,7 @@ const BottomContent = styled.div<{ isShow: IisShowProps }>`
   }
 `;
 
-const BottomToggle = styled.button<{ isShow: IisShowProps }>`
+const BottomToggle = styled.button<{ isShow: boolean }>`
   margin-top: 1.25rem;
   transform: rotate(${(props) => (props.isShow ? "180deg" : "0deg")});
   transition: transform 0.5s ease;
@@ -91,7 +91,7 @@ export default function ProductOverview({
   isWeb,
   gallery,
 }: productOverviewProps) {
-  const [isShow, setIsShow] = useState(false);
+  const [isShow, setIsShow] = useState<boolean>(false);
 
   function toggleIsShow() {
     setIsShow(!isShow);
