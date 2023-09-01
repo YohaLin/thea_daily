@@ -11,3 +11,7 @@ export type productPeopleProps = {
   addCarouselId: () => void, 
   reduceCarouselId:() => void
 }
+
+export interface IisShowProps {
+  isShow: boolean;
+}
