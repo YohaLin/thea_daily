@@ -7,6 +7,8 @@ import Modal from "@/components/Modal"
 // 透過 custom hook 做到不用 CSS 處理 RWD 的問題
 import useMediaQuery from "@/helpers/custom_hooks/useMediaQuery";
 import { useEffect, useState } from "react";
+import { ThemeProvider } from "styled-components";
+import { theme } from "@/infrastructure/theme";
 
 export default function App({ Component, pageProps }: AppProps) {
   // RWD 處理點：如果寬度 >1400px，isWeb 就回傳 true
@@ -24,7 +26,7 @@ export default function App({ Component, pageProps }: AppProps) {
   },[isWeb])
 
   return (
-    <div>
+    <ThemeProvider theme={theme}>
       <Modal isWeb={isWeb} showModal={showModal} toggleShowModal={toggleShowModal}/>
       <header>
         <Header isWeb={isWeb} showModal={showModal} toggleShowModal={toggleShowModal}/>
@@ -34,6 +36,6 @@ export default function App({ Component, pageProps }: AppProps) {
       <footer>
         <Footer isWeb={isWeb} />
       </footer>
-    </div>
+    </ThemeProvider>
   );
 }

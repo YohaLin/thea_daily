@@ -7,6 +7,10 @@ const nextConfig = {
     fiber: false,
     includePaths: [path.join(__dirname, 'styles')],
   },
+  compiler: {
+    styledComponents: true,
+  },
+  
 }
 
 module.exports = nextConfig
