@@ -1,12 +1,11 @@
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import header_logo from "@/svgs/header_logo.svg";
 import header_hamburger from "@/svgs/header_hamburger.svg";
 
-import  styled  from "styled-components";
+import styled from "styled-components";
 import { IisWebProps } from "@/type-config";
-
-
 
 // 因為在 type-config.ts 定義過 isWeb，所以不使用 type，而用 interface 來 extends
 interface headerProps extends IisWebProps {
@@ -14,12 +13,14 @@ interface headerProps extends IisWebProps {
   toggleShowModal: () => void;
 }
 
-const Container = styled.div`
+const Container = styled.div<{showHeader: boolean}>`
   width: 100%;
   height: 3.5rem;
   border-bottom: 1px solid ${(props) => props.theme.colors.text.dark};
   position: fixed;
   z-index: 2;
+  top: ${props => props.showHeader ? "0px" : "-80px"};
+  transition: top 0.3s linear;
   @media screen and (min-width: 1400px) {
     height: 4.5rem;
   }
@@ -72,15 +73,32 @@ export default function Header({
   showModal,
   toggleShowModal,
 }: headerProps) {
-  function handleToggleShowModal(e: any): void {
+  const [showHeader, setShowHeader] = useState<boolean>(true);
+
+    const controlHeader = () => {
+    if (window.scrollY) {
+      setShowHeader(false);
+    } else {
+      setShowHeader(true);
+    }
+  };
+
+  const handleToggleShowModal = (e: any): void => {
     e.preventDefault();
     e.stopPropagation();
     // 確保 showModal = false 才會將 modal 打開，避免狀態混亂
     showModal === false && toggleShowModal();
   }
 
+  useEffect(() => {
+    window.addEventListener("scroll", controlHeader);
+    return () => {
+      window.removeEventListener("scroll", controlHeader);
+    };
+  }, []);
+
   return (
-    <Container>
+    <Container showHeader={showHeader}>
       <HeaderContainer>
         <Link href="/">
           <Image
@@ -96,14 +114,8 @@ export default function Header({
           {/* 手機版只有漢堡排，網頁版有完整資訊 */}
           {isWeb ? (
             <>
-              <LinkText href="/">
-                商品訂製
-              </LinkText>
-              <LinkText
-                href="/author"
-              >
-                創作者
-              </LinkText>
+              <LinkText href="/">商品訂製</LinkText>
+              <LinkText href="/author">創作者</LinkText>
               <SignIn>登入</SignIn>
             </>
           ) : (
