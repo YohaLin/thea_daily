@@ -17,6 +17,7 @@ const Container = styled.div<{showHeader: boolean}>`
   width: 100%;
   height: 3.5rem;
   border-bottom: 1px solid ${(props) => props.theme.colors.text.dark};
+  background-color: ${props => props.theme.colors.bg.one};
   position: fixed;
   z-index: 2;
   top: ${props => props.showHeader ? "0px" : "-80px"};
