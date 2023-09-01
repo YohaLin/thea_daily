@@ -3,7 +3,7 @@ import product_categories_title from "@/svgs/product_categories_title.svg";
 import btn from "@/svgs/product_categories_btn.svg";
 
 import ProductOverview from "@/components/ProductOverview";
-import styles from "@/styles/landingPage/productCategories.module.scss";
+import { styled } from "styled-components";
 
 import product_categories_digital_painting from "@/svgs/product_categories_digital_painting.svg";
 import product_categories_frameless_painting from "@/svgs/product_categories_frameless_painting.svg";
@@ -11,11 +11,62 @@ import product_categories_teabag from "@/svgs/product_categories_teabag.svg";
 import { IisWebProps } from "@/type-config";
 import Link from "next/link";
 
+const Container = styled.div`
+  width: 72%;
+  height: 100%;
+  margin: 5.625rem auto 0 auto;
+  @media screen and (min-width: 1400px) {
+    margin: 16rem auto 0 auto;
+  }
+`;
+
+const Title = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const OverviewContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  @media screen and (min-width: 1400px) {
+    margin-top: 3.25rem;
+  }
+`;
+
+const LinkButton = styled(Link)`
+  margin: 1.5rem auto 0 auto;
+  width: 10.75rem;
+  height: 3rem;
+  background-color: ${props => props.theme.colors.primary.one};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  span {
+    color: ${props => props.theme.colors.text.light};
+    font-size: ${(props) => props.theme.fontSizes.mobile.secondary};
+    font-weight: ${(props) => props.theme.fontWeights.medium};
+  }
+  @media screen and (min-width: 1400px) {
+    margin: 4rem auto 0 auto;
+    width: 16.75rem;
+    height: 3.875rem;
+    span {
+      font-size: ${(props) => props.theme.fontSizes.desktop.secondary};
+    }
+  }
+`;
+
 export default function ProductCategories({ isWeb }: IisWebProps) {
   return (
     <>
-      <div className={styles["product-categories-container"]}>
-        <div className={styles["product-categories-title"]}>
+      <Container>
+        <Title>
           <Image
             src={product_categories_title}
             alt="logo"
@@ -23,14 +74,14 @@ export default function ProductCategories({ isWeb }: IisWebProps) {
             height={isWeb ? 105 : 75}
             priority={true}
           />
-        </div>
-        <div className={styles["product-categories__overview-container"]}>
+        </Title>
+        <OverviewContainer>
           {/* 把 gallery 全部印出來 */}
           {galleries.map((gallery) => (
             <ProductOverview isWeb={isWeb} gallery={gallery} key={gallery.id} />
           ))}
-        </div>
-        <Link href="/category" className={styles["product-categories-btn"]}>
+        </OverviewContainer>
+        <LinkButton href="/category">
           <Image
             src={btn}
             alt="logo"
@@ -39,8 +90,8 @@ export default function ProductCategories({ isWeb }: IisWebProps) {
             priority={true}
           />
           <span>前往商品總覽</span>
-        </Link>
-      </div>
+        </LinkButton>
+      </Container>
     </>
   );
 }
@@ -56,7 +107,7 @@ const galleries: Array<{
     title: "數位圖檔",
     image: product_categories_digital_painting,
     content:
-      "每個客製商品都會拿到數位圖檔，完成作品後會有兩個尺寸規格，可以作為手機桌布，也可以上傳到 IG 炫耀！",
+      "每個客製商品都會拿到數位圖檔，完成作品後會有兩個尺寸規格，不僅可以作為手機桌布，也可以上傳到 IG 炫耀喔！",
   },
   {
     id: "無框畫",

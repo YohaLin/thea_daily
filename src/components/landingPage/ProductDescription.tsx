@@ -4,14 +4,52 @@ import product_description_step_one from "@/svgs/product_description_step_one.sv
 import product_description_step_two from "@/svgs/product_description_step_two.svg";
 import product_description_step_three from "@/svgs/product_description_step_three.svg";
 
-import styles from "@/styles/landingPage/productDescription.module.scss";
-import { IisWebProps } from "@/type-config"
+import { styled } from "styled-components";
+import { IisWebProps } from "@/type-config";
+
+const Container = styled.div`
+  margin-top: 6.625rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  @media screen and (min-width: 1400px) {
+    margin-top: 16.125rem;
+  }
+`;
+
+const CardContainer = styled.div`
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3.75rem;
+
+  @media screen and (min-width: 1400px) {
+    display: flex;
+    flex-direction: row;
+    gap: 8.5rem;
+  }
+`;
+
+const Card = styled.div`
+  @media screen and (min-width: 1400px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: ${(props) => props.theme.fontSizes.desktop.interface};
+    font-weight: ${(props) => props.theme.fontWeights.semiBold};
+    line-height: 2.125rem;
+    letter-spacing: 0.125rem;
+    gap: 0.25rem;
+  }
+`;
 
 export default function ProductDescription({ isWeb }: IisWebProps) {
   return (
     <>
-      <div className={styles["product-description-container"]}>
-        <div className={styles["product-description-title"]}>
+      <Container>
+        <div>
           <Image
             src={product_description_title}
             alt="logo"
@@ -21,9 +59,9 @@ export default function ProductDescription({ isWeb }: IisWebProps) {
           />
         </div>
 
-        <div className={styles["product-description__card-container"]}>
-          <div className={styles["product-description__card"]}>
-            <div className={styles["product-description__card-image"]}>
+        <CardContainer>
+          <Card>
+            <div>
               <Image
                 src={product_description_step_one}
                 alt="logo"
@@ -33,16 +71,16 @@ export default function ProductDescription({ isWeb }: IisWebProps) {
               />
             </div>
             {isWeb ? (
-              <div className={styles["product-description__card-step"]}>
+              <div>
                 Step 1
               </div>
             ) : (
               <></>
             )}
-          </div>
+          </Card>
 
-          <div className={styles["product-description__card"]}>
-            <div className={styles["product-description__card-image"]}>
+          <Card>
+            <div>
               <Image
                 src={product_description_step_two}
                 alt="logo"
@@ -52,16 +90,16 @@ export default function ProductDescription({ isWeb }: IisWebProps) {
               />
             </div>
             {isWeb ? (
-              <div className={styles["product-description__card-step"]}>
+              <div>
                 Step 2
               </div>
             ) : (
               <></>
             )}
-          </div>
+          </Card>
 
-          <div className={styles["product-description__card"]}>
-            <div className={styles["product-description__card-image"]}>
+          <Card>
+            <div>
               <Image
                 src={product_description_step_three}
                 alt="logo"
@@ -71,15 +109,15 @@ export default function ProductDescription({ isWeb }: IisWebProps) {
               />
             </div>
             {isWeb ? (
-              <div className={styles["product-description__card-step"]}>
+              <div>
                 Step 3
               </div>
             ) : (
               <></>
             )}
-          </div>
-        </div>
-      </div>
+          </Card>
+        </CardContainer>
+      </Container>
     </>
   );
 }

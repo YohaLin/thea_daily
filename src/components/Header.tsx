@@ -3,14 +3,69 @@ import Link from "next/link";
 import header_logo from "@/svgs/header_logo.svg";
 import header_hamburger from "@/svgs/header_hamburger.svg";
 
-import styles from "@/styles/header.module.scss";
+import  styled  from "styled-components";
 import { IisWebProps } from "@/type-config";
+
+
 
 // 因為在 type-config.ts 定義過 isWeb，所以不使用 type，而用 interface 來 extends
 interface headerProps extends IisWebProps {
   showModal: Boolean;
   toggleShowModal: () => void;
 }
+
+const Container = styled.div`
+  width: 100%;
+  height: 3.5rem;
+  border-bottom: 1px solid ${(props) => props.theme.colors.text.dark};
+  position: fixed;
+  z-index: 2;
+  @media screen and (min-width: 1400px) {
+    height: 4.5rem;
+  }
+`;
+
+const HeaderContainer = styled.div`
+  width: 87.8%;
+  height: 3.5rem;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  @media screen and (min-width: 1400px) {
+    width: 91.5%;
+    height: 4.5rem;
+  }
+`;
+
+const LinkContainer = styled.div`
+  @media screen and (min-width: 1400px) {
+    display: flex;
+    align-items: center;
+    gap: 3.75rem;
+  }
+`;
+
+const SignIn = styled.button`
+  font-family: "Noto Sans TC";
+  font-weight: 350;
+  font-size: ${(props) => props.theme.fontSizes.desktop.interface};
+  width: 6.5625rem;
+  height: 2.625rem;
+  line-height: 2.625rem;
+  border: ${(props) => props.theme.colors.text.dark} solid 1px;
+  border-radius: 47px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
+
+const LinkText = styled(Link)`
+  font-family: "Noto Sans TC";
+  font-weight: 350;
+  font-size: ${(props) => props.theme.fontSizes.desktop.interface};
+`;
 
 export default function Header({
   isWeb,
@@ -25,8 +80,8 @@ export default function Header({
   }
 
   return (
-    <div className={styles["header"]}>
-      <div className={styles["header-container"]}>
+    <Container>
+      <HeaderContainer>
         <Link href="/">
           <Image
             src={header_logo}
@@ -34,24 +89,26 @@ export default function Header({
             width={isWeb ? 48 : 32}
             height={isWeb ? 48 : 32}
             priority={true}
-            className={styles["header__logo"]}
           />
         </Link>
 
-        <div className={styles["header__link-container"]}>
+        <LinkContainer>
           {/* 手機版只有漢堡排，網頁版有完整資訊 */}
           {isWeb ? (
             <>
-              <Link href="/" className={styles["header__link-order"]}>商品訂製</Link>
-              <Link href="/author" className={styles["header__link-author"]}>創作者</Link>
-              <button className={styles["header__link-signin"]}>登入</button>
+              <LinkText href="/">
+                商品訂製
+              </LinkText>
+              <LinkText
+                href="/author"
+              >
+                創作者
+              </LinkText>
+              <SignIn>登入</SignIn>
             </>
           ) : (
             showModal === false && (
-              <button
-                className={styles["header__link-hamburger"]}
-                onClick={handleToggleShowModal}
-              >
+              <button onClick={handleToggleShowModal}>
                 <Image
                   src={header_hamburger}
                   alt="這是註解"
@@ -62,8 +119,8 @@ export default function Header({
               </button>
             )
           )}
-        </div>
-      </div>
-    </div>
+        </LinkContainer>
+      </HeaderContainer>
+    </Container>
   );
 }

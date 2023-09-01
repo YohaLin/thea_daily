@@ -1,3 +1,5 @@
+'use client'
+
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import AboutAuthor from "@/components/landingPage/AboutAuthor";
@@ -11,15 +13,26 @@ import product_people_group from "@/svgs/product_people_group.svg";
 import product_people_individual from "@/svgs/product_people_individual.svg";
 import product_people_double from "@/svgs/product_people_double.svg";
 
-import styles from "@/styles/landingPage.module.scss";
+import { styled } from "styled-components";
 import { useState } from "react";
-import { IisWebProps } from "@/type-config"
+import { IisWebProps } from "@/type-config";
 
 
-export default function LandingPage({isWeb}: IisWebProps) {
+const LandingPageContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  position: relative;
+`;
+
+const BodyContainer = styled.section`
+  display: flex;
+  flex-direction: column;
+`;
+
+export default function LandingPage({ isWeb }: IisWebProps) {
   const [carouselId, setCarouselId] = useState<number>(0);
 
-  function addCarouselId():void {
+  function addCarouselId(): void {
     // 如果 carouselId 為 2 時，點擊下一步讓 carouselId 改成 0
     if (carouselId === carousel.length - 1) {
       setCarouselId(0);
@@ -28,7 +41,7 @@ export default function LandingPage({isWeb}: IisWebProps) {
     }
   }
 
-  function reduceCarouselId():void {
+  function reduceCarouselId(): void {
     // 如果 carouselId 為 0 時，點擊上一步讓 carouselId 改成 2
     if (carouselId === 0) {
       setCarouselId(carousel.length - 1);
@@ -38,60 +51,49 @@ export default function LandingPage({isWeb}: IisWebProps) {
   }
 
   return (
-    <div className={styles["landing-page-container"]}>
+      <LandingPageContainer>
+        <BodyContainer>
+          {/* 無臉畫製作 */}
+          <ProductMaking isWeb={isWeb} />
 
-      <section className={styles["body-container"]}>
-        {/* 無臉畫製作 */}
-        <ProductMaking 
-          isWeb={isWeb} 
-        />
+          {/* 選擇個人、雙人、團體 */}
+          {isWeb ? (
+            <ProductPeopleWeb
+              carousel={carousel}
+              carouselId={carouselId}
+              addCarouselId={addCarouselId}
+              reduceCarouselId={reduceCarouselId}
+            />
+          ) : (
+            <ProductPeopleMobile
+              carousel={carousel}
+              carouselId={carouselId}
+              addCarouselId={addCarouselId}
+              reduceCarouselId={reduceCarouselId}
+            />
+          )}
 
-        {/* 選擇個人、雙人、團體 */}
-        {isWeb ? (
-          <ProductPeopleWeb
-            carousel={carousel}
-            carouselId={carouselId}
-            addCarouselId={addCarouselId}
-            reduceCarouselId={reduceCarouselId}
-          />
-        ) : (
-          <ProductPeopleMobile
-            carousel={carousel}
-            carouselId={carouselId}
-            addCarouselId={addCarouselId}
-            reduceCarouselId={reduceCarouselId}
-          />
-        )}
+          {/* 商品種類 */}
+          <ProductCategories isWeb={isWeb} />
 
-        {/* 商品種類 */}
-        <ProductCategories
-          isWeb={isWeb}
-        />
+          {/* 商品說明 */}
+          <ProductDescription isWeb={isWeb} />
 
-        {/* 商品說明 */}
-        <ProductDescription 
-          isWeb={isWeb} 
-        />
-
-        {/* 關於作者 */}
-        <AboutAuthor 
-          isWeb={isWeb} 
-        />
-      </section>
-    </div>
+          {/* 關於作者 */}
+          <AboutAuthor isWeb={isWeb} />
+        </BodyContainer>
+      </LandingPageContainer>
   );
 }
 
-
-
 const carousel: Array<{
-  id: number,
-  title: string,
-  mainImage: string,
-  sideImage: string,
-  content: string,
-  lastStep: string,
-  nextStep: string,
+  id: number;
+  title: string;
+  mainImage: string;
+  sideImage: string;
+  content: string;
+  lastStep: string;
+  nextStep: string;
 }> = [
   {
     id: 0,
